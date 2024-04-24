@@ -1,0 +1,27 @@
+Configurar o GIT Local
+git config --global user.name raianeneubern
+git config --global user.email raianeneubern@gmail.com
+
+Criar um projeto MVC com C#
+    dotnet new mvc -o Raniflix
+    dotnet new sln --name Raniflix (Criar uma Solução)
+    dotnet sln add Raniflix\Raniflix.csproj (Aplica o Projeto dentro da Solução)
+
+Executar o projeto
+cd Raniflix
+dotnet watch run
+
+- Database First / Code First
+- Instalar os pacotes necessários
+
+1º Forma - Acessar o site nuget.org
+    - EntityFrameworkCore
+
+2º Forma - Usar a extensão Nuget Gallery
+    - Shift + Ctrl + P
+    - Nuget [Enter]
+    - Pesquisar e instalar os pacotes:
+        - EntityFrameworkCore
+        - EntityFrameworkCore.Design
+        - EntityFrameworkCore.Tools
+        - Pomelo.EntityFrameworkCore.MySql
