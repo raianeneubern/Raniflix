@@ -1,6 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using Raniflix.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+string conn = builder.Configuration.GetConnectionString("RaniFlixConnection");
+var version = ServerVersion.AutoDetect(conn);
+builder.Services.AddDbContext<AppDbContext>(
+    opt => opt.UseMySql(conn, version)
+);
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
