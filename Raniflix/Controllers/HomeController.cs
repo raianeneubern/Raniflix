@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Raniflix.Data;
 using Raniflix.Models;
 
 namespace Raniflix.Controllers;
@@ -7,15 +8,18 @@ namespace Raniflix.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly AppDbContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, AppDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
     public IActionResult Index()
     {
-        return View();
+        var movies = _context.Movies.ToList();
+        return View(movies);
     }
 
     public IActionResult Privacy()
