@@ -1,14 +1,23 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Raniflix.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// serviço de conexão com o Banco de Dados
 string conn = builder.Configuration.GetConnectionString("RaniFlixConnection");
 var version = ServerVersion.AutoDetect(conn);
 builder.Services.AddDbContext<AppDbContext>(
     opt => opt.UseMySql(conn, version)
 );
+
+// Serviço de Gestão de Usuários
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(
+    opt => opt.SignIn.RequireConfirmedAccount = false
+)
+.AddEntityFrameworkStores<AppDbContext>()
+.AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
 
